@@ -10,6 +10,7 @@ $(SPEC_S Deprecated Features,
 
     $(TABLE2 Deprecated Features,
         $(THEAD Feature,                                                          Spec,  Dep,    Error,  Gone)
+        $(TROW $(DEPLINK Comparing static arrays by identity),                    future, &nbsp;, &nbsp;, &nbsp;)
         $(TROW $(DEPLINK Using the result of a comma expression),                 future, &nbsp;, &nbsp;, &nbsp;)
         $(TROW $(DEPLINK delete),                                                 future, &nbsp;, &nbsp;, &nbsp;)
         $(TROW $(DEPLINK scope for allocating classes on the stack),              future, &nbsp;, &nbsp;, &nbsp;)
@@ -56,6 +57,30 @@ $(SPEC_S Deprecated Features,
         $(DD The feature is completely gone)
     )
 
+
+$(H3 $(DEPNAME Comparing static arrays by identity))
+    $(P The identity operator ($(D is)) currently compares static arrays by first
+        coercing them to slices. This results in a reference comparison, rather
+        than a value comparison as one would expect.
+
+        ---
+        int[2] a = [8, 9];
+        int[2] b = [8, 9];
+        assert(a is b); // false
+        // equivalent to:
+        assert(a[] is b[]);
+        ---
+
+        $(D is) will eventually be fixed to compare static arrays by value.
+    )
+$(H4 Corrective Action)
+    $(P Use the equality operator ($(D ==)) exclusively to compare static arrays.
+    )
+$(H4 Rationale)
+    $(P Static arrays are currently the only value types which are compared
+        by reference in an identity comparison. This inconsistent behaviour is
+        unintuitive for general use and problematic for generic code.
+    )
 
 $(H3 $(DEPNAME Using the result of a comma expression))
     $(P The comma operator (`,`) allows executing multiple expressions and

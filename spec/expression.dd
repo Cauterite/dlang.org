@@ -330,6 +330,8 @@ $(GNAME IdentityExpression):
 
     $(P For static and dynamic arrays, identity is defined as referring
         to the same array elements and the same number of elements.
+        $(B Note:) comparing static arrays by identity is currently deprecated.
+        Eventually the behaviour of $(D is) will be changed so that static arrays are compared by value.
     )
 
     $(P For other operand types, identity is defined as being the same

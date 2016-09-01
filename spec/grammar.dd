@@ -345,6 +345,7 @@ $(GNAME PrimaryExpression):
     $(GLINK Typeof)
     $(GLINK TypeidExpression)
     $(GLINK IsExpression)
+    $(GLINK DoExpression)
     $(D $(LPAREN)) $(GLINK Expression) $(D $(RPAREN))
     $(GLINK TraitsExpression)
     $(GLINK SpecialKeyword)
@@ -457,6 +458,11 @@ $(GNAME TypeSpecialization):
     $(D shared)
     $(D return)
     $(D __parameters)
+)
+
+$(GRAMMAR
+$(GNAME DoExpression):
+    $(D do $(LPAREN)) $(GLINK ArgumentList) $(D $(RPAREN))
 )
 
 $(GRAMMAR
